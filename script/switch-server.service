@@ -1,0 +1,12 @@
+[Unit]
+Description=Switch Server Service
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/var/www/html/switch-server/
+ExecStart=python server.py
+
+[Install]
+WantedBy=multi-user.target
+
