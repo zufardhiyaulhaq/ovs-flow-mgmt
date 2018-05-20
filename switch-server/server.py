@@ -120,7 +120,14 @@ def l3Handler(data):
             command = 'sudo ovs-ofctl add-flow %s ip,dl_src=%s,dl_dst=%s,nw_src=%s,nw_dst=%s,actions=%s' %(bridge,src_mac,dst_mac,src_ip,dst_ip,action)
 
     os.system(command)
-    
+
+def l4Handler(data):
+    if data['action']!=None:
+        action = data['action']
+
+    if data['bridge']!=None:
+        bridge = data['bridge'] 
+
 # {
 #     'layer':['l2','l3','l4'],
 #     'src_mac':[],
