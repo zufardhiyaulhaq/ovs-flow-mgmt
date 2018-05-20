@@ -8,4 +8,4 @@ OpenVSwitch OpenFlow Flow Management is a Web Based Flow Management for OpenVSwi
 1. Dashboard
 
 ### Concept
-![alt text](https://raw.githubusercontent.com/zufardhiyaulhaq/OpenDayLight/master/Images/OpenDayLight%20Architecture.png)
+![alt text](https://raw.githubusercontent.com/zufardhiyaulhaq/ovs-flow-mgmt/master/images/concept.png)
