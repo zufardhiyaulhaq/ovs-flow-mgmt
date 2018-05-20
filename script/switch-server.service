@@ -5,7 +5,7 @@ Description=Switch Server Service
 User=root
 Group=root
 WorkingDirectory=/var/www/html/switch-server/
-ExecStart=python server.py
+ExecStart=sudo python server.py
 
 [Install]
 WantedBy=multi-user.target
