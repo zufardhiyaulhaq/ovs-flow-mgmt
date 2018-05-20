@@ -27,11 +27,8 @@ def postJsonHandler():
         return "not spesific the layer!"
 
 def l2Handler(data):
-    if data['action']!=None:
-        action = data['action']
-
-    if data['bridge']!=None:
-        bridge = data['bridge']
+    action = data['action']
+    bridge = data['bridge']
 
     if (data['src_mac']!=None) and (data['dst_mac']==None):
         src_mac = data['src_mac']
@@ -49,11 +46,8 @@ def l2Handler(data):
     os.system(command)
 
 def l3Handler(data):
-    if data['action']!=None:
-        action = data['action']
-
-    if data['bridge']!=None:
-        bridge = data['bridge']
+    action = data['action']
+    bridge = data['bridge']
 
     if ((data['src_mac']==None) and (data['dst_mac']==None)):
  
@@ -122,23 +116,225 @@ def l3Handler(data):
     os.system(command)
 
 def l4Handler(data):
-    if data['action']!=None:
-        action = data['action']
+    action = data['action']
+    bridge = data['bridge']
+    protocol = data['protocol']
 
-    if data['bridge']!=None:
-        bridge = data['bridge'] 
+    if ((data['src_port']!=None) and (data['dst_port']==None)):
+        src_port = data['src_port']
+
+        if ((data['src_mac']==None) and (data['dst_mac']==None)):
+
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,nw_src=%s,tp_src=%s,actions=%s' %(bridge,protocol,src_ip,src_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,nw_dst=%s,tp_src=%s,actions=%s' %(bridge,protocol,dst_ip,src_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,nw_src=%s,nw_dst=%s,tp_src=%s,actions=%s' %(bridge,protocol,src_ip,dst_ip,src_port,action)
+        
+        elif ((data['src_mac']!=None) and (data['dst_mac']==None)):
+            src_mac = data['src_mac']
+            
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,nw_src=%s,tp_src=%s,actions=%s' %(bridge,protocol,src_mac,src_ip,src_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,nw_dst=%s,tp_src=%s,actions=%s' %(bridge,protocol,src_mac,dst_ip,src_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,nw_src=%s,nw_dst=%s,tp_src=%s,actions=%s' %(bridge,protocol,src_mac,src_ip,dst_ip,src_port,action)
+        
+        elif ((data['src_mac']==None) and (data['dst_mac']!=None)):
+            dst_mac = data['dst_mac']
+            
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_dst=%s,nw_src=%s,tp_src=%s,actions=%s' %(bridge,protocol,dst_mac,src_ip,src_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_dst=%s,nw_dst=%s,tp_src=%s,actions=%s' %(bridge,protocol,dst_mac,dst_ip,src_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_dst=%s,nw_src=%s,nw_dst=%s,tp_src=%s,actions=%s' %(bridge,protocol,dst_mac,src_ip,dst_ip,src_port,action)
+        
+        elif ((data['src_mac']!=None) and (data['dst_mac']!=None)):
+            src_mac = data['src_mac']
+            dst_mac = data['dst_mac']
+            
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,dl_dst=%s,nw_src=%s,tp_src=%s,actions=%s' %(bridge,protocol,src_mac,dst_mac,src_ip,src_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,dl_dst=%s,nw_dst=%s,tp_src=%s,actions=%s' %(bridge,protocol,src_mac,dst_mac,dst_ip,src_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,dl_dst=%s,nw_src=%s,nw_dst=%s,tp_src=%s,actions=%s' %(bridge,protocol,src_mac,dst_mac,src_ip,dst_ip,src_port,action)
+    
+    elif ((data['src_port']==None) and (data['dst_port']!=None)):
+        dst_port = data['dst_port']
+
+        if ((data['src_mac']==None) and (data['dst_mac']==None)):
+
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,nw_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_ip,dst_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,nw_dst=%s,tp_dst=%s,actions=%s' %(bridge,protocol,dst_ip,dst_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,nw_src=%s,nw_dst=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_ip,dst_ip,dst_port,action)
+        
+        elif ((data['src_mac']!=None) and (data['dst_mac']==None)):
+            src_mac = data['src_mac']
+            
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,nw_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,src_ip,dst_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,nw_dst=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,dst_ip,dst_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,nw_src=%s,nw_dst=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,src_ip,dst_ip,dst_port,action)
+        
+        elif ((data['src_mac']==None) and (data['dst_mac']!=None)):
+            dst_mac = data['dst_mac']
+            
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_dst=%s,nw_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,dst_mac,src_ip,dst_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_dst=%s,nw_dst=%s,tp_dst=%s,actions=%s' %(bridge,protocol,dst_mac,dst_ip,dst_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_dst=%s,nw_src=%s,nw_dst=%s,tp_dst=%s,actions=%s' %(bridge,protocol,dst_mac,src_ip,dst_ip,dst_port,action)
+        
+        elif ((data['src_mac']!=None) and (data['dst_mac']!=None)):
+            src_mac = data['src_mac']
+            dst_mac = data['dst_mac']
+            
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,dl_dst=%s,nw_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,dst_mac,src_ip,dst_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,dl_dst=%s,nw_dst=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,dst_mac,dst_ip,dst_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,dl_dst=%s,nw_src=%s,nw_dst=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,dst_mac,src_ip,dst_ip,dst_port,action)
+
+    elif ((data['src_port']!=None) and (data['dst_port']!=None)):
+        src_port = data['src_port']
+        dst_port = data['dst_port']
+
+        if ((data['src_mac']==None) and (data['dst_mac']==None)):
+
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,nw_src=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_ip,src_port,dst_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,nw_dst=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,dst_ip,src_port,dst_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,nw_src=%s,nw_dst=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_ip,dst_ip,src_port,dst_port,action)
+        
+        elif ((data['src_mac']!=None) and (data['dst_mac']==None)):
+            src_mac = data['src_mac']
+            
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,nw_src=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,src_ip,src_port,dst_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,nw_dst=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,dst_ip,src_port,dst_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,nw_src=%s,nw_dst=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,src_ip,dst_ip,src_port,dst_port,action)
+        
+        elif ((data['src_mac']==None) and (data['dst_mac']!=None)):
+            dst_mac = data['dst_mac']
+            
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_dst=%s,nw_src=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,dst_mac,src_ip,src_port,dst_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_dst=%s,nw_dst=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,dst_mac,dst_ip,src_port,dst_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_dst=%s,nw_src=%s,nw_dst=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,dst_mac,src_ip,dst_ip,src_port,dst_port,action)
+        
+        elif ((data['src_mac']!=None) and (data['dst_mac']!=None)):
+            src_mac = data['src_mac']
+            dst_mac = data['dst_mac']
+            
+            if (data['src_ip']!=None) and (data['dst_ip']==None):
+                src_ip = data['src_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,dl_dst=%s,nw_src=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,dst_mac,src_ip,src_port,dst_port,action)
+            
+            elif (data['src_ip']==None) and (data['dst_ip']!=None):
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,dl_dst=%s,nw_dst=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,dst_mac,dst_ip,src_port,dst_port,action)
+            
+            elif (data['src_ip']!=None) and (data['dst_ip']!=None):
+                src_ip = data['src_ip']
+                dst_ip = data['dst_ip']
+                command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,dl_dst=%s,nw_src=%s,nw_dst=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,dst_mac,src_ip,dst_ip,src_port,dst_port,action)
+    
+    os.system(command)
 
 # {
-#     'layer':['l2','l3','l4'],
-#     'src_mac':[],
-#     'dst_mac':[], 
-#     'src_ip':[],
-#     'dst_ip':[],
-#     'protocol':['tcp','udp'],
-#     'src_port':[]
-#     'dst_port':[]
-#     'action':['drop']
-#     'bridge':['']
+#     "layer":"l3",
+#     "src_mac":null,
+#     "dst_mac":"a0:00:00:00:00:01", 
+#     "src_ip":"192.168.1.1",
+#     "dst_ip":"172.1.1.1",
+#     "protocol":null,
+#     "src_port":null,
+#     "dst_port":null,
+#     "action":"drop",
+#     "bridge":"br1"
 # }
 
 if __name__ == '__main__':
