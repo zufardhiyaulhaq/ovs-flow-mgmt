@@ -1,0 +1,12 @@
+[Unit]
+Description=Dashboard Service
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/var/www/html/dashboard/
+ExecStart=python dashboard.py
+
+[Install]
+WantedBy=multi-user.target
+
