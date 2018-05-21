@@ -11,6 +11,7 @@ app.config['BASIC_AUTH_PASSWORD'] = 'matrix'
 app.config['BASIC_AUTH_FORCE'] = True
 
 @app.route('/api', methods = ['POST'])
+@login_required
 def postJsonHandler():
     data = request.get_json()
     print (data)
@@ -323,19 +324,6 @@ def l4Handler(data):
                 command = 'sudo ovs-ofctl add-flow %s %s,dl_src=%s,dl_dst=%s,nw_src=%s,nw_dst=%s,tp_src=%s,tp_dst=%s,actions=%s' %(bridge,protocol,src_mac,dst_mac,src_ip,dst_ip,src_port,dst_port,action)
     
     os.system(command)
-
-# {
-#     "layer":"l3",
-#     "src_mac":null,
-#     "dst_mac":"a0:00:00:00:00:01", 
-#     "src_ip":"192.168.1.1",
-#     "dst_ip":"172.1.1.1",
-#     "protocol":null,
-#     "src_port":null,
-#     "dst_port":null,
-#     "action":"drop",
-#     "bridge":"br1"
-# }
 
 if __name__ == '__main__':
    app.run(host="0.0.0.0",port=5000,debug=True)
