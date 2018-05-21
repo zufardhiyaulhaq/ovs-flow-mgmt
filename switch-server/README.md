@@ -18,8 +18,8 @@ cp -R switch-server/ /var/www/html/
 - Install Python virtualenv and requirements.
 ```
 cd /var/www/html/switch-server/
-virtualenv
-source/env/bin/activate
+virtualenv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 - Change the API username & password
