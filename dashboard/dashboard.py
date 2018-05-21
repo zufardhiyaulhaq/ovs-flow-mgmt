@@ -29,6 +29,7 @@ def l4():
 @app.route('/api', methods=['POST'])
 def api():
     data = request.form.to_dict(flat=True)
+
     url = str("http://"+str(data['device_ip'])+":"+str(data['port'])+"/api")
     username = str(data['username'])
     password = str(data['password'])
@@ -50,12 +51,17 @@ def api():
         "action": None,
         "bridge": None
     }
+    
+    for key, value in data.items():
+        if value == "":
+            data.pop(key)
 
     flowmod.update(data)
     data = json.dumps(flowmod)
 
-    post = requests.post(url=url,  auth=(username, password), data=data, headers={"content-type":"application/json"})
+    print (data)
 
+    post = requests.post(url=url,  auth=(username, password), data=data, headers={"content-type":"application/json"})
     return "added"
 
 if __name__ == '__main__':
