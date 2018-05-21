@@ -10,8 +10,10 @@ app.config['BASIC_AUTH_USERNAME'] = 'john'
 app.config['BASIC_AUTH_PASSWORD'] = 'matrix'
 app.config['BASIC_AUTH_FORCE'] = True
 
+basic_auth = BasicAuth(app)
+
 @app.route('/api', methods = ['POST'])
-@login_required
+@basic_auth.required
 def postJsonHandler():
     data = request.get_json()
     print (data)
