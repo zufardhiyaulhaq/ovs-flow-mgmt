@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_api import status
 from flask_basicauth import BasicAuth
 from flask import request
 
@@ -19,15 +20,15 @@ def postJsonHandler():
     print (data)
     if data['layer']=='l2':
         l2Handler(data)
-        return "l2 flow is added"
+        return "Layer 2 flow is added into Switch", status.HTTP_201_CREATED
     elif data['layer']=='l3':
         l3Handler(data)
-        return "l3 flow is added"
+        return "Layer 3 flow is added into Switch", status.HTTP_201_CREATED
     elif data['layer']=='l4':
         l4Handler(data)
-        return "l4 flow is added"
+        return "Layer 4 flow is added into Switch", status.HTTP_201_CREATED
     else:
-        return "not spesific the layer!"
+        return "Layer is not found. Please Define the Layer", status.HTTP_400_BAD_REQUEST
 
 def l2Handler(data):
     action = data['action']
