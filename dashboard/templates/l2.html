@@ -5,8 +5,14 @@
     <meta charset="utf-8" />
     <title>Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href=" {{ url_for('static', filename='css/bootstrap.css') }} " />
-    <link rel="stylesheet" href=" {{ url_for('static', filename='css/bootstrap-grid.css') }} " />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
     <link rel="shortcut icon" href=" {{ url_for('static', filename='images/favicon.ico') }} " />
 
 </head>
@@ -27,7 +33,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/">
                             Dashboard
                         </a>
                     </li>
@@ -53,20 +59,47 @@
                 <p class="lead">Change and send Layer 2 Flow Modification to OpenVSwitch.</p>
             </div>
         </div>
-        <form>
+        <form method="POST" action="/api">
+            <input type="hidden" readonly name="layer" value="l2">
             <div class="form-group">
-                <label for="device-ip">OpenVSwitch IP Address</label>
-                <input type="text" class="form-control" id="device-ip" placeholder="Enter OpenVSWitch Address">
+                <label for="device-ip">OpenVSwitch Address</label>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Enter IP Address" name="device_ip">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Enter Port Number" name="port">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">API Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter Username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">API Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
             </div>
             <div class="form-group">
                 <label for="src-mac">Source MAC Address</label>
-                <input type="text" class="form-control" id="src-mac" placeholder="Enter MAC Address">
+                <input type="text" class="form-control" id="src-mac" placeholder="Enter MAC Address" name="src_mac">
             </div>
             <div class="form-group">
                 <label for="dst-mac">Destination MAC Address</label>
-                <input type="text" class="form-control" id="dst-mac" placeholder="Enter MAC Address">
+                <input type="text" class="form-control" id="dst-mac" placeholder="Enter MAC Address" name="dst_mac">
+            </div>
+            <div class="form-group">
+                <label for="bridge">Bridge Name</label>
+                <input type="text" class="form-control" id="bridge" placeholder="Enter Bridge Name" name="bridge">
+            </div>
+            <div class="form-group">
+                <label for="action">Action</label>
+                <select class="form-control" id="action" name="action">
+                    <option>drop</option>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+
         </form>
 
     </div>

@@ -17,7 +17,6 @@ basic_auth = BasicAuth(app)
 @basic_auth.required
 def postJsonHandler():
     data = request.get_json()
-    print (data)
     if data['layer']=='l2':
         l2Handler(data)
         return "Layer 2 flow is added into Switch", status.HTTP_201_CREATED
