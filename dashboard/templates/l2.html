@@ -1,0 +1,75 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href=" {{ url_for('static', filename='css/bootstrap.css') }} " />
+    <link rel="stylesheet" href=" {{ url_for('static', filename='css/bootstrap-grid.css') }} " />
+    <link rel="shortcut icon" href=" {{ url_for('static', filename='images/favicon.ico') }} " />
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <b>
+                    Goose
+                </b>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true">
+                            Modification
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Layer 2</a>
+                            <a class="dropdown-item" href="#">Layer 3</a>
+                            <a class="dropdown-item" href="#">Layer 4</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">
+                    <b>Layer 2 Modification</b>
+                </h1>
+                <p class="lead">Change and send Layer 2 Flow Modification to OpenVSwitch.</p>
+            </div>
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="device-ip">OpenVSwitch IP Address</label>
+                <input type="text" class="form-control" id="device-ip" placeholder="Enter OpenVSWitch Address">
+            </div>
+            <div class="form-group">
+                <label for="src-mac">Source MAC Address</label>
+                <input type="text" class="form-control" id="src-mac" placeholder="Enter MAC Address">
+            </div>
+            <div class="form-group">
+                <label for="dst-mac">Destination MAC Address</label>
+                <input type="text" class="form-control" id="dst-mac" placeholder="Enter MAC Address">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+</body>
+
+</html>

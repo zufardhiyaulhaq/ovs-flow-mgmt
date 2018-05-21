@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask import request
 import requests
 
@@ -6,24 +6,23 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-   return render_template(‘index.html’)
+    return render_template('index.html')
 
 @app.route('/l2')
-def index():
-   return render_template(‘l2.html’)
+def l2():
+   return render_template('l2.html')
 
 @app.route('/l3')
-def index():
-   return render_template(‘l3.html’)
+def l3():
+   return render_template('l3.html')
 
 @app.route('/l4')
-def index():
-   return render_template(‘l4.html’)
+def l4():
+   return render_template('l4.html')
 
-@app.route('/api')
+@app.route('/api', methods = ['POST'])
 def api():
-    r
-
+    data = request.get_json()
 
 if __name__ == '__main__':
    app.run(debug = True)
