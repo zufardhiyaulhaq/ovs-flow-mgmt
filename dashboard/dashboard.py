@@ -59,8 +59,6 @@ def api():
     flowmod.update(data)
     data = json.dumps(flowmod)
 
-    print (data)
-
     post = requests.post(url=url,  auth=(username, password), data=data, headers={"content-type":"application/json"})
     return "added"
 
