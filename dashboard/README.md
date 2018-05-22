@@ -29,3 +29,8 @@ sudo systemctl start dashboard
 - Open The Dashboard
 ```
 http://<ip-address>:4000/
+```
+
+### Screenshot
+![alt text](https://raw.githubusercontent.com/zufardhiyaulhaq/ovs-flow-mgmt/master/images/concept.png)
+![alt text](https://raw.githubusercontent.com/zufardhiyaulhaq/ovs-flow-mgmt/master/images/concept.png)

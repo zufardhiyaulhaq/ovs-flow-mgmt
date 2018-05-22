@@ -31,3 +31,7 @@ We have hard work to create dashboard for controlling the devices. but if you wa
 }
 ```
 this is the example of sending layer 4 rule to the devices.
+
+### Installing
+- [Installing Switch Server](https://github.com/zufardhiyaulhaq/ovs-flow-mgmt/tree/master/switch-server)
+- [Installing Dashboard](https://github.com/zufardhiyaulhaq/ovs-flow-mgmt/tree/master/dashboard)
