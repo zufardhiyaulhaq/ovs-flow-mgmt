@@ -14,7 +14,7 @@ cd ovs-flow-mgmt
 sudo cp script/switch-server.service /etc/systemd/system/
 mkdir /var/www/html/
 sudo cp -R switch-server/ /var/www/html/
-sudo chown user:user -R /var/www/html/dashboard/
+sudo chown user:user -R /var/www/html/switch-server/
 ```
 - Install Python virtualenv and requirements.
 ```
