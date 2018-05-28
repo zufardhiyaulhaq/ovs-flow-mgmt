@@ -5,7 +5,7 @@ Description=Dashboard Service
 User=root
 Group=root
 WorkingDirectory=/var/www/html/dashboard/
-ExecStart=python dashboard.py
+ExecStart=/var/www/html/dashboard/venv/bin/python /var/www/html/dashboard/dashboard.py
 
 [Install]
 WantedBy=multi-user.target

@@ -11,14 +11,15 @@ git clone https://github.com/zufardhiyaulhaq/ovs-flow-mgmt
 - Copy service for the API and copy switch-server directory.
 ```
 cd ovs-flow-mgmt
-sudo cp scripts/switch-server.service /etc/systemd/system/
+sudo cp script/switch-server.service /etc/systemd/system/
 mkdir /var/www/html/
 cp -R switch-server/ /var/www/html/
+sudo chown user:user -R /var/www/html/dashboard/
 ```
 - Install Python virtualenv and requirements.
 ```
 cd /var/www/html/switch-server/
-virtualenv venv
+sudo virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```

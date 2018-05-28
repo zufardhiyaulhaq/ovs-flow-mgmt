@@ -11,14 +11,15 @@ git clone https://github.com/zufardhiyaulhaq/ovs-flow-mgmt
 - Copy service for the API and copy dashboard directory.
 ```
 cd ovs-flow-mgmt
-sudo cp scripts/dashboard.service /etc/systemd/system/
+sudo cp script/dashboard.service /etc/systemd/system/
 mkdir /var/www/html/
-cp -R dashboard/ /var/www/html/
+sudo cp -R dashboard/ /var/www/html/
+sudo chown user:user -R /var/www/html/dashboard/
 ```
 - Install Python virtualenv and requirements.
 ```
-cd /var/www/html/switch-server/
-virtualenv venv
+cd /var/www/html/dashboard/
+sudo virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
