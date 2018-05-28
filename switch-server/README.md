@@ -21,7 +21,7 @@ sudo chown user:user -R /var/www/html/switch-server/
 cd /var/www/html/switch-server/
 sudo virtualenv venv
 source venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirement.txt
 ```
 - Change the API username & password
 ```
